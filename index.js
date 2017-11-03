@@ -116,7 +116,7 @@ server.register([{
         method: 'GET',
         path: '/testing',
         handler: function (request, reply) {
-            reply.view('simeda', null, { layout: 'blank' });
+            reply.view('home', null, { layout: 'blank' });
     }
     });
 
@@ -163,17 +163,14 @@ server.register([{
             //     if (err) {
             //         return reply(Boom.internal('Internal MongoDB error', err));
             //     }
-                console.log(result.username+" "+result.password);
-                if(result.password==request.payload.password){
+                if(result&&result.password==request.payload.password){
                     reply("Please wait").state('session', { 'user':request.payload.username,'isloggedin':true, 'name':result.name }).redirect('/accept');
                     // console.log(request.state.session);
                 }
                 else{
                     reply("Please wait").redirect('/reject');
-                }
-            });
+                }            });
             // db.collection('users').insert( { username: request.payload.username, password:request.payload.password } );
-            // reply("chu");
         }
 
 
@@ -205,6 +202,16 @@ server.register([{
         path: '/js/{jslink}',
         handler: function (request, reply) {
             reply.file('./public/materialize/js/'+request.params.jslink);
+        }
+    });
+    server.route({
+        method: 'GET',
+        path: '/scripts/logicsim/{jslink}',
+        handler: function (request, reply) {
+            // reply(request.params.jslink);
+            // reply.file('./public/materialize/README.md');
+
+            reply.file('./public/logicsim/scripts/'+request.params.jslink);
         }
     });
 
@@ -241,8 +248,9 @@ server.register([{
         path: '/sim/{lab}/{expt}',
         handler: function (request, reply) {
             var lab = request.params.lab;
-            if(lab=="eda") reply.view('simeda');
-            else if(lab=="cs") reply.view('simcs');
+            if(lab=="eda") reply.view('simeda',null,{layout:'blank'});
+            else if(lab=="cs") reply.file('./public/logicsim/index.html');
+            else if(lab=="mpmc") reply.view('simmpmc');
             else  reply.view('simerr');
         }
     });
