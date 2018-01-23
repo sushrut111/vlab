@@ -1,0 +1,26 @@
+{"_id":{"$oid":"59d7250602f287f53c32266b"},"lab":"cs","expt":"1","name":"Data Conditioning and reconditioning","wiki":"https://en.wikipedia.org/wiki/Line_code"}
+{"_id":{"$oid":"59d7327302f287f53c32266c"},"lab":"eda","expt":"1","name":"DC Circuit Analysis","wiki":"https://en.wikibooks.org/wiki/Electronics/DC_Circuit_Analysis"}
+{"_id":{"$oid":"59d73561980b0cb6dcdc5078"},"lab":"eda","expt":"2","name":"AC Circuit Analysis","wiki":"https://en.wikibooks.org/wiki/Electronics/DC_Circuit_Analysis"}
+{"_id":{"$oid":"59d73579980b0cb6dcdc5079"},"lab":"eda","expt":"3","name":"Transistor Circuits","wiki":"https://en.wikibooks.org/wiki/Electronics/DC_Circuit_Analysis"}
+{"_id":{"$oid":"59d737c1332bc83c79e79f9f"},"lab":"cs","expt":"2","name":"AM Transmitter and Reciever","wiki":""}
+{"_id":{"$oid":"59d740062f49d93dd87c7ce8"},"lab":"dsd","expt":"2","name":"Write a VHDL program in structural model for a) 16:1 mux realization b) 3:8 decoder realization through 2:4 decoder","wiki":""}
+{"_id":{"$oid":"59d7401910e4443e17c2456c"},"lab":"cs","expt":"3","name":"FM Transmitter \u0026 Receiver","wiki":""}
+{"_id":{"$oid":"59d7402d10e4443e17c2456d"},"lab":"dsd","expt":"3","name":"Write a VHDL program in behavioral model for a) 16:1 mux b) 3:8 decoder c) 8:3 encoder d) 8 bit parity generator and checker","wiki":""}
+{"_id":{"$oid":"59d7403410e4443e17c2456e"},"lab":"cs","expt":"4","name":"AM/FM Radio Receiver","wiki":""}
+{"_id":{"$oid":"59d7404810e4443e17c2456f"},"lab":"cs","expt":"5","name":"Analog signal sampling \u0026 Reconstruction","wiki":""}
+{"_id":{"$oid":"59d7404910e4443e17c24570"},"lab":"dsd","expt":"4","name":"Write a VHDL program in structural and behavioral models for a) 8 bit asynchronous up-down counter b) 8 bit synchronous up-down counter","wiki":""}
+{"_id":{"$oid":"59d7405810e4443e17c24571"},"lab":"cs","expt":"6","name":"Generation \u0026 Detection of PAM/PWM/PPM","wiki":""}
+{"_id":{"$oid":"59d74066c8c89b3e45224af8"},"lab":"cs","expt":"7","name":"Generation \u0026 Detection of PCM","wiki":""}
+{"_id":{"$oid":"59d7406ec8c89b3e45224af9"},"lab":"dsd","expt":"5","name":"Write a VHDL program for 4 bit sequence detector through Mealy and Moore state machines","wiki":""}
+{"_id":{"$oid":"59d740deb4f6d63e680be39e"},"lab":"dsd","expt":"6","name":"Write a VHDL program for traffic light controller realization through state machine.","wiki":""}
+{"_id":{"$oid":"59d740ecb4f6d63e680be39f"},"lab":"cs","expt":"8","name":"Generation \u0026 Detection of DM/SIGMA DELTA/ ADM","wiki":""}
+{"_id":{"$oid":"59d740fbb4f6d63e680be3a0"},"lab":"cs","expt":"9","name":"Baseband digital data transmission","wiki":""}
+{"_id":{"$oid":"59d74101b4f6d63e680be3a1"},"lab":"dsd","expt":"7","name":"Write a VHDL program for vending machine controller through state machine","wiki":""}
+{"_id":{"$oid":"59d7410db4f6d63e680be3a2"},"lab":"cs","expt":"10","name":"Generation \u0026 Detection of BPSK/DPSK/DEPSK","wiki":""}
+{"_id":{"$oid":"59d7411fe0cb153e941ce09e"},"lab":"cs","expt":"11","name":"Simulation of digital modulation schemes","wiki":""}
+{"_id":{"$oid":"59d7415ee0cb153e941ce09f"},"lab":"dsd","expt":"8","name":"Write a VHDL program in behavioral model for 8 bit booth’s multiplier","wiki":""}
+{"_id":{"$oid":"59d74181e0cb153e941ce0a0"},"lab":"dsd","expt":"9","name":"Write a VHDL program in behavioral model for 8 bit shift and add multiplier.","wiki":""}
+{"_id":{"$oid":"59d741a4e0cb153e941ce0a1"},"lab":"dsd","expt":"10","name":"Write a VHDL program in structural model for 8 bit Universal Shift Register.","wiki":""}
+{"_id":{"$oid":"59d741cce0cb153e941ce0a2"},"lab":"dsd","expt":"11","name":"Write a VHDL program for implementation of data path and controller units a) Serial Adder b) Shift and add multiplier c) Booth’s multiplier d) ALU e) MIPS processor.","wiki":""}
+{"_id":{"$oid":"5a082e540a2c5a0f76796aed"},"lab":"mpmc","expt":"1","name":"Printing hello world","wiki":""}
+{"_id":{"$oid":"5a0befe9d7487d0ffe36a7a4"},"lab":"dsd","expt":"1","name":"UP Counter simulator","wiki":"https://www.tutorialspoint.com/computer_logical_organization/digital_counters.htm"}
