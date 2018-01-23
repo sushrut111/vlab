@@ -45,7 +45,7 @@ server.route({
     method: 'GET',
     path: '/',
     handler: function (request, reply) {
-        reply('Hello, world!');
+        reply.file('./public/home.html');
     }
 });
 server.register([{
@@ -64,10 +64,15 @@ server.register([{
         method: 'GET',
         path: '/login',
         handler: function (request, reply) {
-            
-            if(!request.state.session) reply.file('./public/login.html');
+            // reply("iuhjnljk");
+            // console.log(request.query.message);
+            if(!request.state.session) reply.view('login',{message:request.query.message},{ layout: 'loginlay' });
             else if(request.state.session.isloggedin==true) reply().redirect('/accept');
-            else reply.file('./public/login.html');
+             else reply.view('login',{message:request.query.message},{ layout: 'loginlay' });
+            
+            // if(!request.state.session) reply.file('./public/login.html');
+            // else if(request.state.session.isloggedin==true) reply().redirect('/accept');
+            // else reply.file('./public/login.html');
         }
     });
     server.route({
@@ -75,10 +80,57 @@ server.register([{
         path: '/accept',
         handler: function(request,reply){
             console.log(request.state.session);
-            if(!request.state.session) reply("log in first").redirect("/login");
-            else reply.view('dashboard',{name : request.state.session.user});
+            if(!request.state.session) reply.view('login',{message:"Log in first"},{layout:"loginlay"});
+//reply("log in first").redirect("/login");
+            else {
+                const db = request.mongo.db;
+                if(request.query.p){
+                    console.log(request.query.p);
+                }
+                db.collection('users').findOne({'username':request.state.session.user},function (err,result){
+                reply.view('dashboard',{name : request.state.session.user,email:result.email,message:request.query.message});
+                });
+
+            }
         }
     });
+        server.route({
+        method: 'POST',
+        path: '/register',
+        handler: function (request, reply) {
+            var name = request.payload.fname + request.payload.lname;
+            var phone = request.payload.phone;
+            var email = request.payload.email;
+            var username = request.payload.username;
+            var password = request.payload.password;
+                const db = request.mongo.db;
+            var exist = 0;
+            
+            if(!(name&&phone&&email&&username&&password)){
+                reply.view('login',{message:"incomplete"},{layout:"loginlay"});
+            }
+            else if(username){
+                db.collection('users').findOne({'username':username}, function (err, result) {
+                if(result) exist = 1; 
+
+            if(exist==1) 
+                reply.view('login',{message:"exists"},{layout:"loginlay"});
+
+            else{
+            db.collection('users').insert({email:email,phone:phone,email:email,name:name,username:username,password:password});
+            reply.view('login',{message:"success"},{layout:"loginlay"});
+
+            }    
+
+
+            });
+
+ 
+            }
+
+        }
+    });
+
     server.route({
         method: 'GET',
         path: '/{lab}/{expt}',
@@ -147,8 +199,8 @@ server.register([{
         method: 'GET',
         path: '/logout',
         handler: function(request,reply){
-            if(!request.state.session.isloggedin) reply("log in first").redirect("/login");
-            reply().unstate('session').redirect('/login');
+            if(!request.state.session.isloggedin) redirect("/login?message=log in first");
+            reply().unstate('session').redirect('/login?message=logged out');
         }
     });
     server.route({
@@ -164,11 +216,12 @@ server.register([{
             //         return reply(Boom.internal('Internal MongoDB error', err));
             //     }
                 if(result&&result.password==request.payload.password){
-                    reply("Please wait").state('session', { 'user':request.payload.username,'isloggedin':true, 'name':result.name }).redirect('/accept');
+                    reply("Please wait").state('session', { 'user':request.payload.username,'isloggedin':true, 'name':result.name }).redirect('/accept?message=login successful');
                     // console.log(request.state.session);
                 }
                 else{
-                    reply("Please wait").redirect('/reject');
+                    reply.view('login',{message:"wrong username or password"},{layout:"loginlay"});
+
                 }            });
             // db.collection('users').insert( { username: request.payload.username, password:request.payload.password } );
         }
@@ -203,6 +256,14 @@ server.register([{
         handler: function (request, reply) {
             reply.file('./public/materialize/js/'+request.params.jslink);
         }
+    });    
+    server.route({
+        method: 'GET',
+        path: '/fonts/roboto/{font}',
+        handler: function (request, reply) {
+            // reply('./public/materialize/fonts/roboto/'+request.params.font);
+            reply.file('./public/materialize/fonts/roboto/'+request.params.font);
+        }
     });
     server.route({
         method: 'GET',
@@ -224,9 +285,10 @@ server.register([{
     });
     server.route({
         method: 'GET',
-        path: '/manual/{filename}',
+        path: '/manual/{lab}/{no}',
         handler: function (request, reply) {
-            reply.file('./public/manuals/'+request.params.filename+".pdf");
+            // reply('./public/manuals/'+request.params.lab+request.params.no+".pdf");
+            reply.file('./public/manuals/'+request.params.lab+request.params.no+".pdf");
         }
     });
     server.route({
@@ -250,6 +312,7 @@ server.register([{
             var lab = request.params.lab;
             if(lab=="eda") reply.view('simeda',null,{layout:'blank'});
             else if(lab=="cs") reply.file('./public/logicsim/index.html');
+            else if(lab=="dsd") reply.file('./public/logicsim/index.html');
             else if(lab=="mpmc") reply.view('simmpmc');
             else  reply.view('simerr');
         }
@@ -257,6 +320,13 @@ server.register([{
     server.route({
         method: 'GET',
         path: '/sim/cs/images/{img}',
+        handler: function (request, reply) {
+            var img = request.params.img;
+            reply.file('./public/images/'+img);
+        }
+    });server.route({
+        method: 'GET',
+        path: '/sim/dsd/images/{img}',
         handler: function (request, reply) {
             var img = request.params.img;
             reply.file('./public/images/'+img);

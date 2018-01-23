@@ -2,7 +2,9 @@
   <html>
     <head>
       <!--Import Google Icon Font-->
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import Google Icon Font-->
+      <link href="/fonts/roboto/MaterialIcons-Regular.woff" rel="stylesheet">
+      <link href="/fonts/roboto/fontconfig.css" rel="stylesheet">
       <!--Import materialize.css-->
       <link type="text/css" rel="stylesheet" href="/materialize"  media="screen,projection"/>
 
@@ -14,7 +16,7 @@
     <body>
 
 
-  <nav>
+  <nav class="blue">
     <div class="nav-wrapper">
       <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>  
 
@@ -37,13 +39,13 @@
       </div>
  -->      <!-- <a href=""><img class="circle" src="images/yuna.jpg"></a> -->
       <a href=""><span class="name">{{name}}</span></a>
-      <a href=""><span class="email">jdandturk@gmail.com</span></a>
+      <a href=""><span class="email">{{email}}</span></a>
     </div></li>
-    <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
-    <li><a href="#!">Second Link</a></li>
-    <li><div class="divider"></div></li>
-    <li><a class="subheader">Subheader</a></li>
-    <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+    <li><a class="waves-effect" href="/accept"><i class="material-icons">home</i>Home</a></li>
+    <li><a class="waves-effect" href="/history"><i class="material-icons">history</i>Access History</a></li>
+    <li><a class="waves-effect" href="/profile"><i class="material-icons">person</i>Profile</a></li>
+
+    <li><a class="waves-effect" href="/logout"><i class="material-icons">power_settings_new</i>Logout</a></li>
   </ul>
   
 <!--Navbar-->
@@ -67,5 +69,11 @@
 
 
       </script>
+      <script type="text/javascript">
+ // Materialize.toast({{message}}, displayLength, className, completeCallback);
+ $( document ).ready(function() {
+    Materialize.toast('{{message}}', 3000, 'rounded');
+});
+ </script>
     </body>
   </html>
