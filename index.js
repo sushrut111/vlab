@@ -6,7 +6,7 @@ const Path = require('path');
 // const Boom = require('boom');
 // const Mongo = require('hapi-mongodb');
 const server = new Hapi.Server();
-server.connection({ port: 3000, host: '0.0.0.0' });
+server.connection({ port: 80, host: '0.0.0.0' });
 // server.listen(80, 'current_local_ip');
 
 const dbOpts = {
