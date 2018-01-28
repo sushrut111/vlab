@@ -166,6 +166,13 @@ server.register([{
     });
     server.route({
         method: 'GET',
+        path: '/crquiz',
+        handler: function (request, reply) {
+            reply.view('quizcreate');
+    }
+    });
+    server.route({
+        method: 'GET',
         path: '/testing',
         handler: function (request, reply) {
             reply.view('home', null, { layout: 'blank' });
@@ -183,6 +190,28 @@ server.register([{
             const db = request.mongo.db;
             db.collection('labsdata').insert({lab:lab,expt:expt,name:name,wiki:wiki});
             reply.redirect("/testi");
+    }
+    });
+    server.route({
+        method: 'POST',
+        path: '/insert_ques',
+        handler: function (request, reply) {
+            var question = request.payload.question;
+            var answer = request.payload.answer;
+            var option1 = request.payload.option1;
+            var option2 = request.payload.option2;
+            var option3 = request.payload.option3;
+            var option4 = request.payload.option4;
+            var lab = request.payload.lab;
+            var expt = request.payload.number;
+            
+            const db = request.mongo.db;
+            db.collection('quiz').insert({lab:lab,expt:expt,question:question,answer:answer,option1:option1,option2:option2,option3:option3,option4:option4});
+            db.collection('quiz').count({'lab':lab,'expt':expt},function (err,result){
+                console.log(result);
+                reply.view('quizcreate',{message:'inserted '+result+'th question in '+lab+' lab`s '+expt+'th experiment'});
+            });
+            
     }
     });
 
