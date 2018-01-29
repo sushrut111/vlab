@@ -155,11 +155,12 @@ server.register([{
                 {
                                 var exptname = result.name;
                                 var wiki = result.wiki;
+                                var demofile = result.demofile;
                                 console.log(wiki);
 
                                 // reply.file('./public/experiment.html');
 
-                reply.view('experiment',{lab:lab,exptname:exptname,expt:expt,wiki:wiki,message:message});
+                reply.view('experiment',{lab:lab,exptname:exptname,expt:expt,wiki:wiki,message:message,demofile:demofile});
                 }
             });
 
@@ -222,7 +223,17 @@ server.register([{
         method: 'GET',
         path: '/demo',
         handler: function(request,reply){
+            if(!request.state.session) {reply.redirect('/login?message=log in first');
+                        return;}
          reply.view('cir',{message:request.query.message},{ layout: 'none' });
+        }
+
+    });
+  server.route({
+        method: 'GET',
+        path: '/iframe.html',
+        handler: function(request,reply){
+         reply("hello "+request.state.session.user);
         }
 
     });
