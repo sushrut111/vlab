@@ -3,7 +3,9 @@
 const Hapi = require('hapi');
 const Good = require('good');
 const Path = require('path');
+const Handlebars = require('handlebars');
 // const Boom = require('boom');
+
 // const Mongo = require('hapi-mongodb');
 const server = new Hapi.Server();
 server.connection({ port: 80, host: '0.0.0.0' });
@@ -36,11 +38,15 @@ server.register(require('vision'), (err) => {
         relativeTo: __dirname,
         path: 'public',
         layout: true,
-        layoutPath: Path.join(__dirname, 'public/layout')
+        layoutPath: Path.join(__dirname, 'public/layout'),
+        helpersPath: Path.join(__dirname, 'public/helpers'),
         // layoutPath: './public/layout',
         //helpersPath: './public/materialize/js'
     });
 });
+
+
+
 server.route({
     method: 'GET',
     path: '/',
@@ -135,11 +141,14 @@ server.register([{
         method: 'GET',
         path: '/{lab}/{expt}',
         handler: function(request,reply){
+            if(!request.state.session) {reply.redirect('/login?message=log in first');
+                        return;}
             var lab = request.params.lab;
             var expt = request.params.expt;
+            var message = request.query.message;
             const db = request.mongo.db;
             // const ObjectID = request.mongo.ObjectID;
-            
+            // reply("here"); return;
             db.collection('labsdata').findOne({'lab':lab,'expt':expt}, function (err, result) {
                 if(!result) reply().redirect('/accept');
                 else
@@ -150,13 +159,118 @@ server.register([{
 
                                 // reply.file('./public/experiment.html');
 
-                reply.view('experiment',{lab:lab,exptname:exptname,number:expt,wiki:wiki});
+                reply.view('experiment',{lab:lab,exptname:exptname,expt:expt,wiki:wiki,message:message});
                 }
             });
 
 
         }
     });
+    server.route({
+        method: 'GET',
+        path: '/quiz/{lab}/{expt}',
+        handler: function(request,reply){
+            if(!request.state.session) {reply.redirect('/login?message=log in first');
+                        return;}
+            var lab = request.params.lab;
+            var expt = request.params.expt;
+            const db = request.mongo.db;
+            const ObjectID = request.mongo.ObjectID;
+            
+            db.collection('quiz').find({'lab':lab,'expt':expt}).toArray(function (err, result) {
+                    console.log(result);
+
+                if(result.length==0) {
+                    var url = "/"+lab+"/"+expt+"?message=quiz not available at the moment";
+                    reply().redirect(url); return;} 
+                else
+                {
+                    var x = "/"+lab+"/"+expt+"?message=already submitted";
+                    // reply.redirect(x);
+                    // return;
+                db.collection('submissions').count({'lab':lab,'expt':expt,'user':request.state.session.user}, function (err, count){
+                        
+                        if(count>0) {reply.redirect(x); return;}
+                                           // console.log(result);
+                var jsarray = ['quizjs'];
+                reply.view('quiz',{jscript:jsarray,quiz:result,lab:lab,expt:expt});
+  
+                    });
+                // reply.view('quiz',{quiz:result[0]});
+                }
+            });
+            // reply.view('quiz',{lab:'edc',expt:'1'});
+
+        }
+    });    
+    server.route({
+        method: 'GET',
+        path: '/demo/{lab}/{expt}',
+        handler: function(request,reply){
+            if(!request.state.session) {reply.redirect('/login?message=log in first');
+                        return;}
+            var lab = request.params.lab;
+            var expt = request.params.expt;
+            const db = request.mongo.db;
+            const ObjectID = request.mongo.ObjectID;
+            
+            
+            
+        }
+    });
+    server.route({
+        method: 'GET',
+        path: '/circuitdemo',
+        handler: function(request,reply){
+            reply.file('./public/cir.html');
+            
+            
+        }
+
+    });
+    server.route({
+        method: 'POST',
+        path: '/submitquiz',
+        handler: function(request,reply){
+            if(!request.state.session) {reply.redirect('/login?message=log in first');
+                        return;}
+            var lab = request.query.lab;
+            var expt = request.query.expt;
+            const db = request.mongo.db;
+            const ObjectID = request.mongo.ObjectID;
+            
+            db.collection('quiz').find({'lab':lab,'expt':expt}).toArray(function (err, result) {
+                if(!result) reply().redirect('/accept');
+                else
+                {   
+                    var answered_json = request.payload;
+                    var answers;//answers from db
+                    var checks;//submitted answers
+                    var score = 0;
+                    var i;
+                    console.log(result.length);
+                    for(i=0;i<result.length;i++){
+                        // console.log('chutiya');
+                        // console.log("question "+)
+                        if(answered_json[result[i].quid]==result[i].answer) score++;
+                    }
+                    console.log(answered_json);
+                    console.log(result);
+                    answered_json.user = request.state.session.user;
+                    answered_json.lab = lab;
+                    answered_json.expt = expt;
+                    answered_json.score = score;
+                    var questions = result.length;//number of questions
+                    db.collection('submissions').insert(answered_json);
+                    reply.view('quizscore',{message:"successfully submitted the quiz",score:score,lab:lab,expt:expt,user:request.state.session.user,questions:questions});
+
+                }
+            });
+            // reply.view('quiz',{lab:'edc',expt:'1'});
+
+        }
+    });
+
     server.route({
         method: 'GET',
         path: '/testi',
@@ -206,9 +320,12 @@ server.register([{
             var expt = request.payload.number;
             
             const db = request.mongo.db;
-            db.collection('quiz').insert({lab:lab,expt:expt,question:question,answer:answer,option1:option1,option2:option2,option3:option3,option4:option4});
             db.collection('quiz').count({'lab':lab,'expt':expt},function (err,result){
-                console.log(result);
+                result = result + 1;
+                db.collection('quiz').insert({quid:lab+expt+result,lab:lab,expt:expt,question:question,answer:answer,option1:option1,option2:option2,option3:option3,option4:option4});
+
+                // console.log(result);
+                
                 reply.view('quizcreate',{message:'inserted '+result+'th question in '+lab+' lab`s '+expt+'th experiment'});
             });
             

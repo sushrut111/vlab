@@ -1,0 +1,15 @@
+<form id='quizform' action="/submitquiz?lab={{lab}}&expt={{expt}}" method="post">
+{{#each quiz }}
+<ul class="collection with-header">
+        <li class="collection-header"><h5>{{this.question}}</h7></li>
+        <li class="collection-item" hidden><div><input type='radio' id="{{this.quid}}0" name='{{this.quid}}' value='0' checked /><label for="{{this.quid}}0"></label></div></li>
+        
+        <li class="collection-item"><div><input type='radio' id="{{this.quid}}1" name='{{this.quid}}' value='1'/><label for="{{this.quid}}1">{{this.option1}}</label></div></li>
+        <li class="collection-item"><div><input type='radio' id="{{this.quid}}2" name='{{this.quid}}' value='2'/><label for="{{this.quid}}2">{{this.option2}}</label></div></li>
+        <li class="collection-item"><div><input type='radio' id="{{this.quid}}3" name='{{this.quid}}' value='3'/><label for="{{this.quid}}3">{{this.option3}}</label></div></li>
+        <li class="collection-item"><div><input type='radio' id="{{this.quid}}4" name='{{this.quid}}' value='4'/><label for="{{this.quid}}4">{{this.option4}}</label></div></li>
+</ul>
+    
+{{/each}}
+<input type='submit' value='submit quiz' class='btn btn-large'> 
+</form>
