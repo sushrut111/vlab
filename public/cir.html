@@ -1,27 +1,120 @@
-$ 1 5.0E-6 10.20027730826997 48 5.0 50
-179 240 80 256 80 1024 1.0
-179 240 256 272 256 1024 -1.0
-R 128 176 96 176 0 1 40.0 5.0 0.0 0.0 0.5
-r 128 176 224 176 0 50.0
-R 480 176 448 176 0 1 40.0 5.0 0.0 0.0 0.5
-r 480 176 544 176 0 50.0
-l 544 176 544 272 0 0.1 -0.05978684403333334
-g 544 272 544 288 0
-w 240 112 224 112 0
-w 224 112 224 176 0
-r 336 80 400 80 0 100.0
-g 400 80 400 96 0
-w 336 144 336 208 0
-w 240 288 240 208 0
-w 240 208 336 208 0
-w 336 256 384 256 0
-r 384 256 384 368 0 100.0
-g 384 368 384 384 0
-w 336 320 336 352 0
-w 336 352 224 352 0
-w 224 352 224 176 0
-w 240 288 176 288 0
-c 176 288 176 368 0 1.0E-5 5.9786844033333315
-g 176 368 176 384 0
-o 2 64 0 35 5.0 0.1 0 -1
-o 4 64 0 35 5.0 0.1 0 -1
+<!DOCTYPE html>
+<html>
+  <head>
+  
+    <!-- Properties can be specified to influence deferred binding -->
+    <meta name='gwt:property' content='locale=en_UK'>
+    
+    
+    <!-- Titles are optional, but useful -->
+    <title></title>
+
+<style>
+.disabled {
+	color: lightgray
+}
+.topSpace {
+	margin-top: 12px;
+}
+.cursorPointer {
+   cursor: default;
+}
+.cursorCross {
+   cursor: crosshair;
+}
+
+.cursorSplitter {
+   cursor: row-resize;
+}
+
+.gwt-MenuItem-disabled {
+	color: lightgray;
+}
+.offScreen {
+	position: absolute;
+	right: 101%;
+	overflow: hidden;
+}
+.gwt-Frame{
+	scrolling="no";
+	border: 0px !important;
+}
+
+.gwt-MenuItem {
+	font-size: 12px !important;
+}
+
+.gwt-MenuBar-horizontal {
+	font-size: 12px !important;
+	}
+	
+.gwt-Label-selected {
+	font-size: 1.3em;
+	font-weight: 700;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+}
+.gwt-Label-1off {
+	color: DarkGray;
+}
+
+.gwt-Label-2off {
+	font-size:0.8em;
+	color: LightGray;
+}
+
+.gwt-Label-current {
+}
+
+.topButton-red {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left:5px;
+    padding: 5px 7px;
+    text-decoration: none;
+    color: #ffffff;
+    cursor: pointer;
+    cursor: hand;
+    font-size: small;
+    background-color: #ff0000; 
+    border: 1px solid #bbb;
+    border-bottom: 1px solid #a0a0a0;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+}
+
+.topButton {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left:5px;
+    padding: 5px 7px;
+    text-decoration: none;
+    cursor: pointer;
+    cursor: hand;
+    font-size: small;
+    background-color: #e7e7e7; 
+    border: 1px solid #bbb;
+    border-bottom: 1px solid #a0a0a0;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+}
+
+</style>
+</head>
+  <body>
+  <!-- Include the next line to allow support for dropbox import/export. You will need your own app key. -->
+  <!--<script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="YOUR_KEY"></script>-->
+
+   
+    <!-- This script tag is what actually loads the GWT module.  The -->
+    <!-- 'nocache.js' file (also called a "selection script") is     -->
+    <!-- produced by the GWT compiler in the module output directory -->
+    <!-- or generated automatically in development mode.             -->
+     <script type="text/javascript" src="/js/circuitjs1.nocache.js"></script>
+    
+    <!-- Include a history iframe to enable full GWT history support -->
+    <!-- (the id must be exactly as shown)                           -->
+    <iframe src="javascript:''" id="__gwt_historyFrame" style="width:0;height:0;border:0"></iframe>
+    
+  </body>
+ </html>

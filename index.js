@@ -74,7 +74,7 @@ server.register([{
             // console.log(request.query.message);
             if(!request.state.session) reply.view('login',{message:request.query.message},{ layout: 'loginlay' });
             else if(request.state.session.isloggedin==true) reply().redirect('/accept');
-             else reply.view('login',{message:request.query.message},{ layout: 'loginlay' });
+            else reply.view('login',{message:request.query.message},{ layout: 'loginlay' });
             
             // if(!request.state.session) reply.file('./public/login.html');
             // else if(request.state.session.isloggedin==true) reply().redirect('/accept');
@@ -205,7 +205,7 @@ server.register([{
     });    
     server.route({
         method: 'GET',
-        path: '/demo/{lab}/{expt}',
+        path: '/sdemo/{lab}/{expt}',
         handler: function(request,reply){
             if(!request.state.session) {reply.redirect('/login?message=log in first');
                         return;}
@@ -220,11 +220,9 @@ server.register([{
     });
     server.route({
         method: 'GET',
-        path: '/circuitdemo',
+        path: '/demo',
         handler: function(request,reply){
-            reply.file('./public/cir.html');
-            
-            
+         reply.view('cir',{message:request.query.message},{ layout: 'none' });
         }
 
     });
@@ -403,6 +401,21 @@ server.register([{
             reply.file('./public/materialize/js/'+request.params.jslink);
         }
     });    
+    server.route({
+        method: 'GET',
+        path: '/js/circuits/{jslink}',
+        handler: function (request, reply) {
+            reply.file('./public/materialize/js/circuits/'+request.params.jslink);
+        }
+    }); 
+    server.route({
+        method: 'GET',
+        path: '/js/gwt/clean/{jslink}',
+        handler: function (request, reply) {
+            reply.file('./public/materialize/js/clean/'+request.params.jslink);
+        }
+    }); 
+
     server.route({
         method: 'GET',
         path: '/fonts/roboto/{font}',
