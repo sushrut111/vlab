@@ -15,7 +15,7 @@
       <p>Access lab manual here<br>
          
       </p>
-      <a href="/manual/{{lab}}/{{number}}" class="secondary-content"><i class="material-icons">grade</i></a>
+      <a href="/manual/{{lab}}/{{expt}}" class="secondary-content"><i class="material-icons">grade</i></a>
     </li>
 
     <li class="collection-item avatar">
@@ -37,7 +37,7 @@
       <span class="title">Test your knowledge</span>
       <p>Take the simple quiz to test your knowledge about the experiment you studied, your score will be stored
       </p>
-      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+      <a href="/quiz/{{lab}}/{{expt}}" class="secondary-content"><i class="material-icons">grade</i></a>
     </li>
 
   </ul>
@@ -63,7 +63,7 @@
             </div>
             <div class="card-action">
               <a href="{{wiki}}">References</a>
-              <a href="/manual/{{lab}}/{{number}}">Lab manual</a>
+              <a href="/manual/{{lab}}/{{expt}}">Lab manual</a>
             </div>
           </div>
         </div>
@@ -75,8 +75,8 @@
               <p>Use this section for simulations (if available) and the expected results</p>
             </div>
             <div class="card-action">
-              <a href="/example/{{lab}}/{{number}}">Waveforms</a>
-              <a href="/sim/{{lab}}/{{number}}">Simulation</a>
+              <a href="/example/{{lab}}/{{expt}}">Waveforms</a>
+              <a href="/sim/{{lab}}/{{expt}}">Simulation</a>
             </div>
           </div>
         </div>
@@ -87,7 +87,7 @@
               <p>Use this section for practising and testing knowledge based on your understanding</p>
             </div>
             <div class="card-action">
-              <a href="/quiz/{{lab}}/{{number}}">Take Quiz</a>
+              <a href="/quiz/{{lab}}/{{expt}}">Take Quiz</a>
               
             </div>
           </div>
