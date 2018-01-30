@@ -51,7 +51,7 @@ server.route({
     method: 'GET',
     path: '/',
     handler: function (request, reply) {
-        reply.file('./public/home.html');
+        reply.file('./public/index5.html');
     }
 });
 server.register([{
@@ -415,6 +415,20 @@ server.register([{
     });    
     server.route({
         method: 'GET',
+        path: '/css/{csslink}',
+        handler: function (request, reply) {
+            reply.file('./public/materialize/css/'+request.params.csslink);
+        }
+    });    
+    server.route({
+        method: 'GET',
+        path: '/js/vendor/{jslink}',
+        handler: function (request, reply) {
+            reply.file('./public/materialize/js/vendor/'+request.params.jslink);
+        }
+    });    
+    server.route({
+        method: 'GET',
         path: '/js/circuits/{jslink}',
         handler: function (request, reply) {
             reply.file('./public/materialize/js/circuits/'+request.params.jslink);
@@ -441,6 +455,14 @@ server.route({
         handler: function (request, reply) {
             // reply('./public/materialize/fonts/roboto/'+request.params.font);
             reply.file('./public/materialize/fonts/roboto/'+request.params.font);
+        }
+    });
+    server.route({
+        method: 'GET',
+        path: '/fonts/{font}',
+        handler: function (request, reply) {
+            // reply('./public/materialize/fonts/roboto/'+request.params.font);
+            reply.file('./public/materialize/fonts/'+request.params.font);
         }
     });
     server.route({
