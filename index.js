@@ -370,6 +370,7 @@ server.register([{
             //     if (err) {
             //         return reply(Boom.internal('Internal MongoDB error', err));
             //     }
+	//	console.log(result.password + "& you entered "+ request.payload.password);
                 if(result&&result.password==request.payload.password){
                     reply("Please wait").state('session', { 'user':request.payload.username,'isloggedin':true, 'name':result.name }).redirect('/accept?message=login successful');
                     // console.log(request.state.session);
