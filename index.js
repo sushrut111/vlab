@@ -156,11 +156,12 @@ server.register([{
                                 var exptname = result.name;
                                 var wiki = result.wiki;
                                 var demofile = result.demofile;
+                                var manual = result.manual;
                                 console.log(wiki);
 
                                 // reply.file('./public/experiment.html');
 
-                reply.view('experiment',{lab:lab,exptname:exptname,expt:expt,wiki:wiki,message:message,demofile:demofile});
+                reply.view('experiment',{lab:lab,exptname:exptname,expt:expt,wiki:wiki,message:message,demofile:demofile,manual:manual});
                 }
             });
 
@@ -484,10 +485,10 @@ server.route({
     });
     server.route({
         method: 'GET',
-        path: '/manual/{lab}/{no}',
+        path: '/manual/{manual}',
         handler: function (request, reply) {
             // reply('./public/manuals/'+request.params.lab+request.params.no+".pdf");
-            reply.file('./public/manuals/'+request.params.lab+request.params.no+".pdf");
+            reply.file('./public/manuals/'+request.params.manual);
         }
     });
     server.route({
