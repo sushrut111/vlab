@@ -419,6 +419,13 @@ server.register([{
             reply.file('./public/materialize/js/circuits/'+request.params.jslink);
         }
     }); 
+server.route({
+        method: 'GET',
+        path: '/js/gwt/clean/images/{jslink}',
+        handler: function (request, reply) {
+            reply.file('./public/materialize/js/clean/images/'+request.params.jslink);
+        }
+    });
     server.route({
         method: 'GET',
         path: '/js/gwt/clean/{jslink}',
