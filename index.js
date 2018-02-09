@@ -161,7 +161,7 @@ server.register([{
 
                                 // reply.file('./public/experiment.html');
 
-                reply.view('experiment',{lab:lab,exptname:exptname,expt:expt,wiki:wiki,message:message,demofile:demofile,manual:manual});
+                reply.view('experiment',{lab:lab,exptname:exptname,expt:expt,wiki:wiki,message:message,demofile:demofile,manual:manual},{layout:'explay'});
                 }
             });
 
