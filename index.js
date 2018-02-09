@@ -310,9 +310,10 @@ server.register([{
             var name = request.payload.name;
             var lab = request.payload.lab;
             var expt = request.payload.number;
-            var wiki = request.payload.wiki;
+            var demofile = request.payload.demofile;
+            var manual = request.payload.manual;
             const db = request.mongo.db;
-            db.collection('labsdata').insert({lab:lab,expt:expt,name:name,wiki:wiki});
+            db.collection('labsdata').insert({lab:lab,expt:expt,name:name,demofile:demofile,manual:manual});
             reply.redirect("/testi");
     }
     });
