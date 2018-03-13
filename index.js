@@ -123,7 +123,7 @@ server.register([{
                 }
                 db.collection('users').findOne({'username':request.state.session.user},function (err,result){
                     
-                reply.view('dashboard',{name : request.state.session.user,email:result.email,message:request.query.message});
+                reply.view('dashboard',{name : request.state.session.user,message:request.query.message});
                 });
 
             }
@@ -171,6 +171,7 @@ server.register([{
             else if(username){
                 db.collection('users').findOne({'username':username}, function (err, result) {
                 if(result) exist = 1; 
+                
 
             if(exist==1) 
                 reply.view('login',{message:"exists"},{layout:"loginlay"});
@@ -200,6 +201,8 @@ server.register([{
                 reply.redirect("/login?message=you need to log in to your acount in order to authorise");
             }
             else{
+
+                console.log('reached');
                 db.collection('users').findOne({'username':request.state.session.user},function (err,result){
                     if(result.admin=='0') reply.redirect("/accept?message=you have to be an administrator to authorise");
                     db.collection('users').updateOne({'regno':regno},{$set:{approved:'1'}}, function (err,result){
@@ -666,6 +669,7 @@ server.register([{
             //     if (err) {
             //         return reply(Boom.internal('Internal MongoDB error', err));
             //     }
+	//	console.log(result.password + "& you entered "+ request.payload.password);
                 if(result&&result.password==request.payload.password){
                     // console.log(request.state.session);
                     if(result.admin=='1'){
