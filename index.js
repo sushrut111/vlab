@@ -441,24 +441,24 @@ server.register([{
             
         }
     });
-    server.route({
-        method: 'GET',
-        path: '/askaquery',
-        handler: function(request,reply){
-            if(!request.state.session) {reply.redirect('/login?message=log in first');
-                        return;}
-            const db = request.mongo.db;
-            // const ObjectID = request.mongo.ObjectID;
-            db.collection('users').find({'admin':'1'}).toArray(function (err,result){
-                console.log(result);
-                var teachers = result;
-                reply.view('askaquery',{teachers:teachers});
+    // server.route({
+    //     method: 'GET',
+    //     path: '/askaquery',
+    //     handler: function(request,reply){
+    //         if(!request.state.session) {reply.redirect('/login?message=log in first');
+    //                     return;}
+    //         const db = request.mongo.db;
+    //         // const ObjectID = request.mongo.ObjectID;
+    //         db.collection('users').find({'admin':'1'}).toArray(function (err,result){
+    //             console.log(result);
+    //             var teachers = result;
+    //             reply.view('askaquery',{teachers:teachers});
 
-            });
+    //         });
             
             
-        }
-    });
+    //     }
+    // });
     server.route({
         method: 'GET',
         path: '/askaquery',
