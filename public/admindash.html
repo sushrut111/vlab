@@ -1,0 +1,22 @@
+ <table>
+        <thead>
+          <tr>
+              <th>Name</th>
+              <th>Registration number</th>
+              <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+{{#each students }}
+			<tr>
+				<td>{{this.name}}</td>
+				<td>{{this.regno}}</td>
+				<td><button class="btn btn-small btn-success {{this.regno}}" onclick="approve({{this.regno}})">approve</button></td>
+			</tr>
+{{/each}}
+          
+        </tbody>
+      </table>
+            

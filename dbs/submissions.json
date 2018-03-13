@@ -1,0 +1,2 @@
+{"_id":{"$oid":"5aa75af3592d2b4be4bf3ea2"},"edc110":"3","edc11":"2","edc12":"2","edc13":"2","edc14":"3","edc15":"2","edc16":"2","edc17":"2","edc18":"3","edc19":"1","user":"sushrut","lab":"edc","expt":"1","score":7,"questions":10,"timestamp":{"$date":"2018-03-13T05:00:35.154Z"}}
+{"_id":{"$oid":"5aa75d8f17c6304cde9656a1"},"edc31":"1","edc32":"3","edc33":"4","edc34":"2","edc35":"3","edc36":"0","edc37":"1","edc38":"4","edc39":"3","edc310":"1","user":"sushrut","lab":"edc","expt":"3","score":3,"questions":10,"timestamp":{"$date":"2018-03-13T05:11:43.821Z"}}
