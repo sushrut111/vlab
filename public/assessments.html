@@ -1,0 +1,24 @@
+<table class="striped">
+	<thead>
+		<tr>
+			<th>Lab</th>
+			<th>Experiment</th>
+			<th>Number of questions</th>
+			<th>Score</th>
+			<th>date submitted</th>
+			<th>action</th>
+		</tr>
+	</thead>
+	<tbody>
+		{{#each labs}}
+			<tr>
+				<td>{{this.lab}}</td>
+				<td>{{this.expt}}</td>
+				<td>{{this.questions}}</td>
+				<td>{{this.score}}</td>
+				<td>{{this.timestamp}}</td>
+				<td><a class="btn" href="/quizscore/{{this.lab}}/{{this.expt}}">View analysis</a></td>
+			</tr>
+		{{/each}}
+	</tbody>
+</table>

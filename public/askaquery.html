@@ -1,0 +1,27 @@
+    <form class="col s12" method="post" action="/submitquery">
+
+  <div class="input-field col s12">
+    <select name="guide">
+      <option value="" disabled selected>Choose a guide to ask a query</option>
+      {{#each teachers}}
+      <option value="{{this.username}}">{{this.name}}</option>
+      {{/each}}
+      
+    </select>
+    <label>Guide</label>
+    <br>
+
+  </div>
+   <div class="row">
+      <div class="row">
+        <div class="input-field col s6">
+          <i class="material-icons prefix">mode_edit</i> 
+          <textarea id="icon_prefix2" class="materialize-textarea" name="query"></textarea>
+          <label for="icon_prefix2">Write your query here in brief</label>
+        </div>
+      </div>
+  </div>
+  <br>
+  <input type="submit" value="SUBMIT" class="btn" >
+    </form>
+        

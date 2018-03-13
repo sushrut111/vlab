@@ -66,19 +66,16 @@
 
        <div class="collection">
         <a class="collection-header"><b><center>Navigation</center></b></a>
-        <a href="/accept" class="collection-item">Home</a>
+        <a href="/admindash" class="collection-item">Approve students</a>
+        <a href="/accept?message=switched to student view" class="collection-item">View as a student</a>
         <a href="/profile" class="collection-item">Profile</a>
-        <a href="/assessments" class="collection-item">Assessments</a>
-        <a href="/askaquery" class="collection-item">Ask a query</a>
+        <a href="/createuser" class="collection-item">Add user</a>
+        <a href="/testi" class="collection-item">Add lab experiment</a>
+        <a href="/crquiz" class="collection-item">Add lab quiz</a>
         <a href="/logout" class="collection-item">Logout</a>
       </div>
       <!-- <hr> -->
-      {{#if lab}}
-       <div class="collection">
-        <a class="collection-header"><center><b>Related experiments</b></center></a>
-        <span class="related"></span>
-      </div>
-      {{/if}}  
+
 
 </div>
 <div class="col m10 s12">{{{content}}}</div>
@@ -136,41 +133,9 @@
  // Materialize.toast({{message}}, displayLength, className, completeCallback);
  $( document ).ready(function() {
     Materialize.toast('{{message}}', 3000, 'rounded');
-
-});
- $(document).ready(function() {
-    $('select').material_select();
 });
 
-{{#if lab}}
-  $.ajax({
-    url: '/getRelated',
-    type: 'post',
-    data: {'lab':'{{lab}}'},
-    beforeSend:function(){
-      //deactivate approve button
-    },
-    success: function (data) {
-      console.log(data);
-      expts = JSON.parse(data);
-      console.log(expts);
-      str = '';
-      for(i=0;i<expts.length;i++){
-        str +='<a href="/'+expts[i].lab+'/'+expts[i].expt+'" class="collection-item">'+expts[i].name+'</a>';
-        if(i>5) break;
-      }
 
-      $('.related').html(str);
-    
-    },
-    error: function (jqXHR, textStatus, errorThrown)
-    {
-      var message = "Ops some Error occured! Please try again.";
-      show_error(message, true);
-    }
-  });
-
-{{/if}}
 
 
  </script>
