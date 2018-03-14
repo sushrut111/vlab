@@ -1,0 +1,8 @@
+<table class='striped'>
+	{{#each queries}}
+		<td>{{this.user}}</td>
+	<td>{{this.query}}</td>
+	<td><a href="/querythread/{{this._id}}" class="btn">Visit thread</a></td>
+	</tr>
+	{{/each}}
+</table>

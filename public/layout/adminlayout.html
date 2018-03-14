@@ -67,6 +67,7 @@
        <div class="collection">
         <a class="collection-header"><b><center>Navigation</center></b></a>
         <a href="/admindash" class="collection-item">Approve students</a>
+        <a href="/querydash" class="collection-item">Queries</a>
         <a href="/accept?message=switched to student view" class="collection-item">View as a student</a>
         <a href="/profile" class="collection-item">Profile</a>
         <a href="/createuser" class="collection-item">Add user</a>
@@ -136,7 +137,11 @@
 });
 
 
-
+ $(document).ready(function(){
+    // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+    $('.modal').modal();
+  });
+      
 
  </script>
 

@@ -3,7 +3,6 @@
 const Hapi = require('hapi');
 const Good = require('good');
 const Path = require('path');
-const ObjectId = require('mongodb').ObjectID;
 const Handlebars = require('handlebars');
 const requestIp = require('request-ip');
 var fs = require('fs');
@@ -456,23 +455,19 @@ server.register([{
             var teacher = request.payload.teacher;
             var query = request.payload.query;
             //var qid;
-            var datetime = new Date();
-            var jsondata = [];
+            var jsondata;
             jsondata.user = user;
             jsondata.teacher = teacher;
             jsondata.query = query;
-            db.collection('queries').insert({'user':user,'teacher':teacher,'query':query}, function (err, result){
-                db.collection('threads').insert({'threadid':result.insertedIds[0].toString(),'author':user,'response':query,'timestamp':datetime});
-                reply.redirect('/myqueries?message=Query submitted!');
-
-            });
+            db.collection('queries').insert(jsondata);
+            reply.redirect('/myqueries?message=Query submitted!');
             
             
             
         }
     });
     server.route({
-        method :'GET',
+        method :'POST',
         path : '/myqueries',
         handler :function(request, reply){
             if(!request.state.session) {reply.redirect('/login?message=log in first');
@@ -481,58 +476,8 @@ server.register([{
             var user = request.state.session.user;
             db.collection('queries').find({'user':user}).toArray(function (err, result){
                 var queries = result;
-                console.log(queries);
-                var jsarray = ['queries'];
-                reply.view('myqueries',{queries:queries,jscript:jsarray});
+                reply.view('myqueries',{queries:queries});
             });            
-        }
-    });
-    server.route({
-        method :'GET',
-        path : '/querydash',
-        handler :function(request, reply){
-            if(!request.state.session) {reply.redirect('/login?message=log in first');
-                        return;}
-            if(!request.state.session.isadmin==true) {reply.redirect('/login?message=you are not an admin'); return;}
-            const db = request.mongo.db;
-            var user = request.state.session.user;
-            db.collection('queries').find({'teacher':user}).toArray(function (err, result){
-                var queries = result;
-                console.log(queries);
-                var jsarray = ['queries'];
-                reply.view('myqueries',{queries:queries,jscript:jsarray},{layout:'adminlayout'});
-            });            
-        }
-    });
-    server.route({
-        method : 'GET',
-        path: '/querythread/{threadid}',
-        handler : function(request,reply){
-            if(!request.state.session) {reply('[{"status":"errored","message":"session timed out, please log in again"}]');return;}
-            const db = request.mongo.db;
-            var threadid = request.params.threadid;
-            db.collection('threads').find({'threadid':threadid}).toArray(function (err,result){
-                // result.status = "success";
-                console.log(result);
-                reply(JSON.stringify(result));
-            });
-        }
-    });
-    server.route({
-        method: 'POST',
-        path: '/querythread',
-        handler: function(request, reply){
-            if(!request.state.session) {reply('[{"status":"errored","message":"session timed out, please log in again"}]');return;}
-            const db = request.mongo.db;
-            var threadid = request.payload.threadid;
-            var author = request.state.session.user;
-            //seen1 is seen status of admin and seen2 is of student
-            var datetime = new Date();
-            var response = request.payload.response;
-            db.collection('threads').insert({'threadid':threadid,'author':author,'response':response,'timestamp':datetime}, function (err,result){
-                if(err) reply('[{"status":"errored","message":"response not sent, please try again"}]');
-                else reply.redirect('/querythread/'+threadid);
-            });
         }
     });
     server.route({
@@ -669,16 +614,7 @@ server.register([{
         method: 'GET',
         path: '/testing',
         handler: function (request, reply) {
-            const db = request.mongo.db;
-            db.collection('dummy').insert({'name':'sush','game':'cs'},function (err,result){
-                console.log(result);
-                var c = result.insertedIds[0].toString();
-                // reply(typeof(result.insertedIds[0].toString()));
-                db.collection('dummy').insert({'name':result.insertedIds[0].toString()});
-                reply(typeof(result.insertedIds[0].toString()));
-// 
-            });
-
+            reply(request.state.session.isadmin);
     }
     });
 
