@@ -9,7 +9,9 @@
 {{#each queries}}
 <div id="{{this._id}}" class="modal bottom-sheet">
     <div class="modal-header">
-      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat right">CLOSE</a>
+      <span style="font-size:12px">Scroll down to send a response</span>
+      <a href="#!" type="button" onclick='fetchthread("{{this._id}}")' class="waves-effect waves-green btn-flat"> <i class="material-icons prefix">loop</i>REFRESH</a>     
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat right"> <i class="material-icons prefix">clear</i></a>
     </div>
     <div class="modal-content" id="modal{{this._id}}">
  
