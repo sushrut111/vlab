@@ -1,0 +1,20 @@
+<table class='striped'>
+	{{#each queries}}
+		<td>{{this.teacher}}</td>
+	<td>{{this.query}}</td>
+	<td><a class="waves-effect waves-light btn modal-trigger" onclick='fetchthread("{{this._id}}")' href="#{{this._id}}">See this thread</a></td>
+	</tr>
+	{{/each}}
+</table>
+{{#each queries}}
+<div id="{{this._id}}" class="modal bottom-sheet">
+    <div class="modal-header">
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat right">CLOSE</a>
+    </div>
+    <div class="modal-content" id="modal{{this._id}}">
+ 
+    </div>
+
+  </div>
+  {{/each}}
+

@@ -1,7 +1,7 @@
     <form class="col s12" method="post" action="/submitquery">
 
   <div class="input-field col s12">
-    <select name="guide">
+    <select name="teacher">
       <option value="" disabled selected>Choose a guide to ask a query</option>
       {{#each teachers}}
       <option value="{{this.username}}">{{this.name}}</option>

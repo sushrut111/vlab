@@ -70,6 +70,7 @@
         <a href="/profile" class="collection-item">Profile</a>
         <a href="/assessments" class="collection-item">Assessments</a>
         <a href="/askaquery" class="collection-item">Ask a query</a>
+        <a href="/myqueries" class="collection-item">My Queries</a>
         <a href="/logout" class="collection-item">Logout</a>
       </div>
       <!-- <hr> -->
@@ -133,6 +134,10 @@
 
       </script>
       <script type="text/javascript">
+      function show_error(msg,st){
+        Materialize.toast(msg, 3000, 'rounded');
+
+      }
  // Materialize.toast({{message}}, displayLength, className, completeCallback);
  $( document ).ready(function() {
     Materialize.toast('{{message}}', 3000, 'rounded');
@@ -172,7 +177,11 @@
 
 {{/if}}
 
-
+ $(document).ready(function(){
+    // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+    $('.modal').modal();
+  });
+          
  </script>
 
 
