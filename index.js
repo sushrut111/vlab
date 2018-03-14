@@ -90,8 +90,8 @@ server.register([{
         path: '/login',
         handler: function (request, reply) {
             const clientIp = requestIp.getClientIp(request);
-            var datetime = new Date();
-            logFile("request from "+clientIp+ " at "+datetime); 
+            // var datetime = new Date();
+            // logFile("request from "+clientIp+ " at "+datetime); 
             // reply("iuhjnljk");
             // console.log(request.query.message);
             if(!request.state.session) reply.view('login',{message:request.query.message},{ layout: 'loginlay' });
