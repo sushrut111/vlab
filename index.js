@@ -13,8 +13,8 @@ var nooffile = 0;
 // fs.readdir(dir, (err, files) => {
   // console.log(files.length);
   // nooffile = files.length;
-var log_file = fs.createWriteStream(__dirname + '/log/debug.log', {flags : 'w'});
-var log_stdout = process.stdout;
+// var log_file = fs.createWriteStream(__dirname + '/log/debug.log', {flags : 'w'});
+// var log_stdout = process.stdout;
 
 // });
 
@@ -669,15 +669,16 @@ server.register([{
         method: 'GET',
         path: '/testing',
         handler: function (request, reply) {
-            const db = request.mongo.db;
-            db.collection('dummy').insert({'name':'sush','game':'cs'},function (err,result){
-                console.log(result);
-                var c = result.insertedIds[0].toString();
+            // const db = request.mongo.db;
+            // db.collection('dummy').insert({'name':'sush','game':'cs'},function (err,result){
+                // console.log(result);
+                // var c = result.insertedIds[0].toString();
                 // reply(typeof(result.insertedIds[0].toString()));
-                db.collection('dummy').insert({'name':result.insertedIds[0].toString()});
-                reply(typeof(result.insertedIds[0].toString()));
+                // db.collection('dummy').insert({'name':result.insertedIds[0].toString()});
+                // reply(typeof(result.insertedIds[0].toString()));
+                reply.view('testing',{},{layout:'none'});
 // 
-            });
+            // });
 
     }
     });
