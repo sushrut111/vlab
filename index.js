@@ -337,18 +337,18 @@ server.register([{
             // const ObjectID = request.mongo.ObjectID;
             // reply("here"); return;
             db.collection('labsdata').findOne({'lab':lab,'expt':expt}, function (err, result) {
-                if(!result) reply().redirect('/accept');
+                if(!result) reply().redirect('/notfound');
                 else
                 {
                                 var exptname = result.name;
-                                var wiki = result.wiki;
+                                //var wiki = result.wiki;
                                 var demofile = result.demofile;
                                 var manual = result.manual;
-                                console.log(wiki);
+                   //             console.log(wiki);
 
                                 // reply.file('./public/experiment.html');
 
-                reply.view('experiment',{lab:lab,exptname:exptname,expt:expt,wiki:wiki,message:message,demofile:demofile,manual:manual},{layout:'layout'});
+                reply.view('experiment',{lab:lab,exptname:exptname,expt:expt,message:message,demofile:demofile,manual:manual},{layout:'layout'});
                 }
             });
 
@@ -367,7 +367,7 @@ server.register([{
             const ObjectID = request.mongo.ObjectID;
             
             db.collection('quiz').find({'lab':lab,'expt':expt}).toArray(function (err, result) {
-                    console.log(result);
+         //           console.log(result);
 
                 if(result.length==0) {
                     var url = "/"+lab+"/"+expt+"?message=quiz not available at the moment";
@@ -392,6 +392,35 @@ server.register([{
 
         }
     });    
+    server.route({
+        method: 'GET',
+        path: '/video/{lab}/{expt}',
+        handler: function(request,reply){
+            if(!request.state.session) {reply.redirect('/login?message=log in first');
+                        return;}
+            var lab = request.params.lab;
+            var expt = request.params.expt;
+            const db = request.mongo.db;
+            const ObjectID = request.mongo.ObjectID;
+            console.log(lab+expt);
+            db.collection('video').findOne({'lab':lab,'expt':expt},function (err, result) {
+                if(result){
+
+                    reply.view('videopage',{video:result.iframe});
+                    // reply.view('videopage');
+                    
+                }
+                else
+                {
+                    reply.redirect('/'+lab+'/'+expt+'?message=no video found');
+                }
+
+                
+            });
+            // reply.view('quiz',{lab:'edc',expt:'1'});
+
+        }
+    });    
     
     server.route({
         method: 'GET',
@@ -410,13 +439,13 @@ server.register([{
                 db.collection('labsdata').findOne({'lab':lab,'expt':expt},function (err,labsdata){
                     var exname = labsdata.name;
 
-                    console.log(labsdata);
+                    //console.log(labsdata);
                     db.collection('submissions').find({'lab':lab,'expt':expt,'user':request.state.session.user}).toArray(function (err, result){
                     var answers = result;
                     var score = answers[0].score;
                     var timestamp = answers[0].timestamp;
                     var questions = answers[0].questions;//no of questions
-                    console.log(answers[0].score);
+                    //console.log(answers[0].score);
                     reply.view("quizscore",{exname:exname,score:score,questions:questions,timestamp:timestamp,analysis:true,quiz:quiz,answers:answers});
                 });
                 });
@@ -437,7 +466,7 @@ server.register([{
             const db = request.mongo.db;
             // const ObjectID = request.mongo.ObjectID;
             db.collection('labsdata').find({'lab':lab},{'lab':true,'name':true,'expt':true}).toArray(function (err,result){
-                console.log(result);
+                //console.log(result);
                 reply(JSON.stringify(result));
 
             });
@@ -481,7 +510,7 @@ server.register([{
             var user = request.state.session.user;
             db.collection('queries').find({'user':user}).toArray(function (err, result){
                 var queries = result;
-                console.log(queries);
+                //console.log(queries);
                 var jsarray = ['queries'];
                 reply.view('myqueries',{queries:queries,jscript:jsarray});
             });            
@@ -498,7 +527,7 @@ server.register([{
             var user = request.state.session.user;
             db.collection('queries').find({'teacher':user}).toArray(function (err, result){
                 var queries = result;
-                console.log(queries);
+                //console.log(queries);
                 var jsarray = ['queries'];
                 reply.view('myqueries',{queries:queries,jscript:jsarray},{layout:'adminlayout'});
             });            
@@ -513,7 +542,7 @@ server.register([{
             var threadid = request.params.threadid;
             db.collection('threads').find({'threadid':threadid}).toArray(function (err,result){
                 // result.status = "success";
-                console.log(result);
+                //console.log(result);
                 reply(JSON.stringify(result));
             });
         }
@@ -544,7 +573,7 @@ server.register([{
             const db = request.mongo.db;
             // const ObjectID = request.mongo.ObjectID;
             db.collection('users').find({'admin':'1'}).toArray(function (err,result){
-                console.log(result);
+                //console.log(result);
                 var teachers = result;
                 reply.view('askaquery',{teachers:teachers});
 
@@ -578,6 +607,16 @@ server.register([{
         }
 
     });
+    server.route({
+        method: 'GET',
+        path: '/notfound',
+        handler: function(request,reply){
+            if(!request.state.session) {reply.redirect('/login?message=log in first');
+                        return;}
+         reply.view('404.html',{},{layout:'none'});
+        }
+
+    });
   server.route({
         method: 'GET',
         path: '/iframe.html',
@@ -607,14 +646,14 @@ server.register([{
                     var checks;//submitted answers
                     var score = 0;
                     var i;
-                    console.log(result.length);
+                  //  console.log(result.length);
                     for(i=0;i<result.length;i++){
                         // console.log('chutiya');
                         // console.log("question "+)
                         if(answered_json[result[i].quid]==result[i].answer) score++;
                     }
-                    console.log(answered_json);
-                    console.log(result);
+                    //console.log(answered_json);
+                    //console.log(result);
                     answered_json.user = request.state.session.user;
                     answered_json.lab = lab;
                     answered_json.expt = expt;
@@ -640,9 +679,9 @@ server.register([{
                         return;}
             var username = request.state.session.user;
             const db = request.mongo.db;
-            console.log(username);
+            //console.log(username);
             db.collection('submissions').find({'user':username}).toArray(function (err,result){
-                console.log(result);
+                //console.log(result);
                 reply.view('assessments',{labs:result});
             });
     }
@@ -695,6 +734,26 @@ server.register([{
             const db = request.mongo.db;
             db.collection('labsdata').insert({lab:lab,expt:expt,name:name,demofile:demofile,manual:manual});
             reply.redirect("/testi");
+    }
+    });
+    server.route({
+        method: 'GET',
+        path: '/addvideo',
+        handler: function (request, reply) {
+            reply.view("addvideo");
+    }
+    });
+
+    server.route({
+        method: 'POST',
+        path: '/insert_video',
+        handler: function (request, reply) {
+            var lab = request.payload.lab;
+            var expt = request.payload.number;
+            var iframe = request.payload.iframe;
+            const db = request.mongo.db;
+            db.collection('video').insert({lab:lab,expt:expt,iframe:iframe});
+            reply.redirect("/addvideo");
     }
     });
     server.route({
@@ -930,7 +989,14 @@ server.route({
     method: 'GET',
     path: '/{name}',
     handler: function (request, reply) {
-        reply('Hello, ' + encodeURIComponent(request.params.name) + '!');
+        reply.redirect('notfound');
+    }
+});
+server.route({
+    method: 'GET',
+    path: '/*',
+    handler: function (request, reply) {
+        reply.redirect('notfound');
     }
 });
 server.register({
