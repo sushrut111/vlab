@@ -73,6 +73,13 @@ server.route({
         reply.file('./public/index5.html');
     }
 });
+server.route({
+    method: 'GET',
+    path: '/teampage',
+    handler: function (request, reply) {
+        reply.file('./public/teampage.html');
+    }
+});
 server.register([{
     register: require('inert'),
     options: {}

@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html>
+<head>
+	      <title>VLAB NITW | Team</title>
+      <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/images/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+
+	<style type="text/css">
+		@import url(https://fonts.googleapis.com/css?family=Roboto:100);
+@import url(https://fonts.googleapis.com/css?family=Maven+Pro);
+@import url(https://fonts.googleapis.com/css?family=Raleway:100);
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+html {
+	-webkit-text-size-adjust: none;
+}
+
+li, ul {
+    list-style: none;
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+p {
+    line-height: 30px;
+}
+
+body {
+    background-color: #e74c3c;
+    animation: bg-color 10s infinite;
+    -webkit-animation: bg-color 10s infinite;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    border-top: 1px dashed #fff;
+    font-size: 18px;
+}
+
+@keyframes bg-color {
+    0%   { background-color: #e74c3c; }
+    20%  { background-color: #f1c40f; }
+    40%  { background-color: #1abc9c; }
+    60%  { background-color: #3498db; }
+    80%  { background-color: #9b59b6; }
+    100% { background-color: #e74c3c; };
+}
+
+.profile-card {
+    margin: 7% auto 0;
+    width: 36%;
+    text-align: center;
+}
+
+.profile-card, header {
+    overflow: hidden;
+}
+
+h1, h2 {
+    margin: 10px 0 15px;
+}
+
+h1 {
+    font-family: 'Maven Pro', sans-serif;
+    font-size: 28px;
+    animation: showit .75s ease 1s both;
+    -webkit-animation: showit .75s ease 1s both;
+}
+
+h2 {
+    font-family: 'Raleway', sans-serif;
+    font-size: 17px;
+    letter-spacing: 1px;
+    animation: showit .75s ease 1.3s both;
+    -webkit-animation: showit .75s ease 1.3s both;
+}
+
+header a {
+    display: inline-block;
+    margin-bottom: 30px;
+}
+
+header, .profile-bio, .profile-social-links {
+    margin-bottom: 50px;
+}
+
+header img {
+    width: 200px;
+    border-radius: 50%;
+    padding: 5px;
+    border: 1px dashed #fff;
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    animation: showme .75s ease .5s both;
+    -webkit-animation: showme .75s ease .5s both;
+}
+
+header img:hover {
+    -webkit-filter: grayscale(0);
+    filter: grayscale(0);
+}
+
+.profile-social-links img {
+    width: 30px;
+    -webkit-filter: grayscale(1);
+    filter: grayscale(1);
+    opacity: .5;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.profile-social-links a {
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.profile-social-links li:last-child img {
+    opacity: .2;
+}
+
+.profile-social-links a:hover img {
+    -webkit-filter: grayscale(0);
+    filter: grayscale(0);
+    opacity: 1;
+}
+
+.profile-social-links li {
+    display: inline-block;
+    margin: 3px 8px;
+}
+
+.profile-social-links a {
+    display: block;
+    padding: 5px;
+    background-color: white;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+}
+
+.profile-social-links li {
+    animation: showit .75s ease 11.4s both;
+    -webkit-animation: showit .75s ease 11.4s both;
+}
+
+.profile-bio p {
+    min-height: 90px;
+    animation: showit .75s ease 1.4s both;
+    -webkit-animation: showit .75s ease 1.4s both;
+}
+
+.profile-bio p i {
+    display: inline-block;
+    font-style: normal;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 100%;
+    animation: type 4s steps(60, end);
+    text-align: center;
+}
+
+.profile-bio p i:nth-child(2) {
+    animation: type2 8s steps(60, end);
+}
+
+.profile-bio p i:nth-child(3) {
+    animation: type3 12s steps(60, end);
+}
+
+@keyframes showme {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale3d(0.3, 0.3, 0.3);
+        transform: scale3d(0.3, 0.3, 0.3);
+    }
+    20% {
+        -webkit-transform: scale3d(1.1, 1.1, 1.1);
+        transform: scale3d(1.1, 1.1, 1.1);
+    }
+    40% {
+        -webkit-transform: scale3d(0.9, 0.9, 0.9);
+        transform: scale3d(0.9, 0.9, 0.9);
+    }
+    60% {
+        opacity: 1;
+        -webkit-transform: scale3d(1.03, 1.03, 1.03);
+        transform: scale3d(1.03, 1.03, 1.03);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    };
+}
+
+@keyframes showit {
+    0% {
+        opacity: 0;
+    }
+    20% {
+        opacity: .2;
+    }
+    40% {
+        opacity: .4;
+    }
+    60% {
+        opacity: .6;
+    }
+    100% {
+        opacity: 1;
+    };
+}
+
+@keyframes type {
+ 
+    from {
+        width: 0;
+    };
+}
+
+@keyframes type2 {
+    0% {
+        width: 0;
+    }
+    50% {
+        width: 0;
+    };
+}
+
+@keyframes type3 {
+    0% {
+        width: 0;
+    }
+    68% {
+        width: 0;
+    };
+}
+	</style>
+
+</head>
+<body>
+<!-- this is the markup. you can change the details (your own name, your own avatar etc.) but don’t change the basic structure! -->
+ <div style="height: 40px; width: 40px; padding-left: 5px; padding-top: 5px;">
+    
+    <!-- twitter - el clásico  -->
+    
+    
+    <!-- envato – use this one to link to your marketplace profile -->
+    <span>
+      <a href="/login?message=">
+        <img src="/images/back.png">
+      </a>
+    </span>
+
+
+
+
+    
+    <!-- codepen - your codepen profile-->
+    
+    
+    <!-- add or remove social profiles as you see fit -->
+    
+  </div>
+<div>
+	<aside class="profile-card">
+  
+  <header>
+    
+    <!-- here’s the avatar -->
+    <a href="https://twitter.com/mandooox">
+      <img src="/images/sklv.jpg">
+    </a>
+
+    <!-- the username -->
+    <h1>K. L. V. SAI PRAKASH SAKURU</h1>
+    
+    <!-- and role or location -->
+    <h2>Associate Professor,Department of ECE,NIT Warangal</h2>
+    
+  </header>
+  
+  <!-- bit of a bio; who are you? -->
+  <div class="profile-bio">
+    
+    <p>
+        <i>Specializations:Switching and Multiplexing,</i>
+        <i>Telecommunication Systems, Computer Networks,Mobile</i>
+        <i>and Cellular networks, AdHoc and Wireless Sensor Networks</i>
+      </p>
+    
+  </div>
+  
+  <!-- some social links to show off -->
+  <ul class="profile-social-links">
+    
+    <!-- twitter - el clásico  -->
+    
+    
+    <!-- envato – use this one to link to your marketplace profile -->
+    <li>
+      <a href="mailto:sai@nitw.ac.in">
+        <img src="/images/gmail.jpg">
+      </a>
+    </li>
+    
+    <!-- codepen - your codepen profile-->
+    
+    
+    <!-- add or remove social profiles as you see fit -->
+    
+  </ul>
+  
+</aside>
+</div>
+<div>
+	<aside class="profile-card">
+  
+  <header>
+    
+    <!-- here’s the avatar -->
+    <a href="https://twitter.com/mandooox">
+      <img src="/images/sush.jpeg">
+    </a>
+
+    <!-- the username -->
+    <h1>Sushrut Kasture</h1>
+    
+    <!-- and role or location -->
+    <h2>Final Year Student,Department of ECE,NIT Warangal</h2>
+    
+  </header>
+  
+  <!-- bit of a bio; who are you? -->
+  <div class="profile-bio">
+    
+    <p>
+        <i>I am a web-developer, and mainly work on backend:</i>
+        <i>I can fetch data from databases like MysSQL and </i>
+        <i> mongo with NodeJs, django and codeigniter</i>
+      </p>
+    
+  </div>
+  
+  <!-- some social links to show off -->
+  <ul class="profile-social-links">
+    
+    <!-- twitter - el clásico  -->
+    <li>
+      <a href="https://www.facebook.com/sushrut111">
+        <img src="/images/fb.jpg">
+      </a>
+    </li>
+    
+    <!-- envato – use this one to link to your marketplace profile -->
+    <li>
+      <a href="https://github.com/sushrut111">
+        <img src="/images/git.jpg">
+      </a>
+    </li>
+    
+    <!-- codepen - your codepen profile-->
+    <li>
+      <a href="mailto:kasturesushrut@gmail.com">
+        <img src="/images/gmail.jpg">
+      </a>
+    </li>
+    
+    <!-- add or remove social profiles as you see fit -->
+    
+  </ul>
+  
+</aside>
+</div>
+<div>
+	<aside class="profile-card">
+  
+  <header>
+    
+    <!-- here’s the avatar -->
+    <a href="https://twitter.com/mandooox">
+      <img src="/images/cd.JPG">
+    </a>
+
+    <!-- the username -->
+    <h1>Chirantan Das</h1>
+    
+    <!-- and role or location -->
+    <h2>Final Year Student,Department of ECE,NIT Warangal</h2>
+    
+  </header>
+  
+  <!-- bit of a bio; who are you? -->
+  <div class="profile-bio">
+    
+    <p>
+        <i>I am web developer and graphic designer, efficient in :</i>
+        <i>HTML5/CSS3/JS/PHP/SQL, product designing, Focus on</i>
+        <i>clean/elegant/efficient code and design,created with &#9825;</i>
+      </p>
+    
+  </div>
+  
+  <!-- some social links to show off -->
+  <ul class="profile-social-links">
+    
+    <!-- twitter - el clásico  -->
+    <li>
+      <a href="https://www.facebook.com/chirantan.das.566">
+        <img src="/images/fb.jpg">
+      </a>
+    </li>
+    
+    <!-- envato – use this one to link to your marketplace profile -->
+    <li>
+      <a href="https://github.com/cd95">
+        <img src="/images/git.jpg">
+      </a>
+    </li>
+    
+    <!-- codepen - your codepen profile-->
+    <li>
+      <a href="mailto:cdiw95@gmail.com">
+        <img src="/images/gmail.jpg">
+      </a>
+    </li>
+    
+    <!-- add or remove social profiles as you see fit -->
+    
+  </ul>
+  
+</aside>
+</div>
+<div>
+	<aside class="profile-card">
+  
+  <header>
+    
+    <!-- here’s the avatar -->
+    <a href="https://twitter.com/mandooox">
+      <img src="/images/pathu.JPG">
+    </a>
+
+    <!-- the username -->
+    <h1>Ashish Pathak</h1>
+    
+    <!-- and role or location -->
+    <h2>Final Year Student,Department of ECE,NIT Warangal</h2>
+    
+  </header>
+  
+  <!-- bit of a bio; who are you? -->
+  <div class="profile-bio">
+    
+    <p>
+        <i>I am a web-developer, backend:</i>
+        <i>Efficient with MySQL,Js,JQuery</i>
+        
+      </p>
+    
+  </div>
+  
+  <!-- some social links to show off -->
+  <ul class="profile-social-links">
+    
+    <!-- twitter - el clásico  -->
+    <li>
+      <a href="https://www.facebook.com/ashish.pathak.3998">
+        <img src="/images/fb.jpg">
+      </a>
+    </li>
+    
+    <!-- envato – use this one to link to your marketplace profile -->
+    <li>
+      <a href="https://github.com/Ashlsh007">
+        <img src="/images/git.jpg">
+      </a>
+    </li>
+    
+    <!-- codepen - your codepen profile-->
+    <li>
+      <a href="mailto:pathaka466@gmail.com">
+        <img src="/images/gmail.jpg">
+      </a>
+    </li>
+    
+    <!-- add or remove social profiles as you see fit -->
+    
+  </ul>
+  
+</aside>
+</div>
+<!-- that’s all folks! -->
+</body>
+</html>
