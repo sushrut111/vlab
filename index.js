@@ -121,13 +121,13 @@ server.register([{
         method: 'GET',
         path: '/accept',
         handler: function(request,reply){
-            console.log(request.state.session);
+            //console.log(request.state.session);
             if(!request.state.session) reply.view('login',{message:"Log in first"},{layout:"loginlay"});
 //reply("log in first").redirect("/login");
             else {
                 const db = request.mongo.db;
                 if(request.query.p){
-                    console.log(request.query.p);
+                 ;//   console.log(request.query.p);
                 }
                 db.collection('users').findOne({'username':request.state.session.user},function (err,result){
                     
@@ -141,7 +141,7 @@ server.register([{
         method: 'GET',
         path: '/home',
         handler: function(request,reply){
-            console.log(request.state.session);
+           // console.log(request.state.session);
             if(!request.state.session) reply.view('login',{message:"Log in first"},{layout:"loginlay"});
 //reply("log in first").redirect("/login");
             else {
@@ -166,14 +166,14 @@ server.register([{
             var exist = 0;
             
             if(!(name&&phone&&regno&&username&&password&&semester&&year)){
-                if(!name) console.log("name not present");
+               /* if(!name) console.log("name not present");
                 if(!phone) console.log("phone not present");
                 if(!username) console.log("username not present");
                 if(!password) console.log("password not present");
                 if(!semester) console.log("semester not present");
                 if(!year) console.log("year not present");
                 if(!regno) console.log("regno not present");
-                
+                */
                 reply.view('login',{message:"incomplete"},{layout:"loginlay"});
             }
             else if(username){
@@ -210,7 +210,7 @@ server.register([{
             }
             else{
 
-                console.log('reached');
+                //console.log('reached');
                 db.collection('users').findOne({'username':request.state.session.user},function (err,result){
                     if(result.admin=='0') reply.redirect("/accept?message=you have to be an administrator to authorise");
                     db.collection('users').updateOne({'regno':regno},{$set:{approved:'1'}}, function (err,result){
@@ -244,9 +244,9 @@ server.register([{
                     else db.collection('users').findOne({'username':request.state.session.user},function (err,result){
                         var year = result.year;
                         var semester = result.semester;
-                console.log("###########################################################")
+               // console.log("###########################################################")
                 db.collection('users').find({'year':year,'semester':semester,'admin':'0',approved:'0'}).toArray(function (err, result) {
-                    console.log(result);
+                 //   console.log(result);
                     var jsarray = ['approve'];
                     reply.view('admindash',{message:message,jscript:jsarray,year:year,semester:semester,students:result},{layout:'adminlayout'});
                 });
@@ -291,7 +291,7 @@ server.register([{
             var exist = 0;
             
             if(!(name&&phone&&lab&&username&&password&&semester&&year)){
-                if(!name) console.log("name not present");
+              /*  if(!name) console.log("name not present");
                 if(!phone) console.log("phone not present");
                 if(!username) console.log("username not present");
                 if(!password) console.log("password not present");
@@ -299,7 +299,7 @@ server.register([{
                 if(!year) console.log("year not present");
                 // if(!regno) console.log("regno not present");
                 if(!lab) console.log("lab not present");
-                
+                */
                 reply.redirect('/createuser?message=incomplete');
                 // reply.view('login',{message:"incomplete"},{layout:"loginlay"});
             }
@@ -409,7 +409,7 @@ server.register([{
             var expt = request.params.expt;
             const db = request.mongo.db;
             const ObjectID = request.mongo.ObjectID;
-            console.log(lab+expt);
+          //  console.log(lab+expt);
             db.collection('video').findOne({'lab':lab,'expt':expt},function (err, result) {
                 if(result){
 
@@ -440,7 +440,7 @@ server.register([{
             const db = request.mongo.db;
             // const ObjectID = request.mongo.ObjectID;
             db.collection('quiz').find({'lab':lab,'expt':expt}).toArray(function (err,result){
-                console.log(result);
+              //  console.log(result);
                 var quiz = result;
 
                 db.collection('labsdata').findOne({'lab':lab,'expt':expt},function (err,labsdata){
@@ -693,6 +693,26 @@ server.register([{
             });
     }
     });
+    server.route({
+        method: 'GET',
+        path: '/profile',
+        handler: function (request, reply){
+            if(!request.state.session) {reply.redirect('/login?message=log in first');
+                        return;}
+            var username = request.state.session.user;
+            //console.log(username);
+            const db = request.mongo.db;
+            //console.log(username);
+            db.collection('users').findOne({'username':username},function (err,result){
+                //console.log(result);
+                var layout;
+                if(result.admin==1) layout = 'adminlayout';
+                else layout = 'layout';
+                reply.view('profile',{user:result},{layout:layout});
+            });
+
+        }
+    });
 
 
     server.route({
@@ -761,6 +781,23 @@ server.register([{
             const db = request.mongo.db;
             db.collection('video').insert({lab:lab,expt:expt,iframe:iframe});
             reply.redirect("/addvideo");
+    }
+    });
+    server.route({
+        method: 'POST',
+        path: '/feedback',
+        handler: function (request, reply) {
+            var name = request.payload.name;
+            if(!name){
+                reply.redirect('/');
+                return;
+            }
+            var email = request.payload.email;
+            var subject = request.payload.subject;
+            var message = request.payload.message;
+            const db = request.mongo.db;
+            db.collection('feedback').insert({name:name,email:email,message:message,subject:subject});
+            reply.redirect("/");
     }
     });
     server.route({

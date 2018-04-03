@@ -269,26 +269,26 @@
                                 <div class="contact-area">
 
                                     <h4 >Leave a message</h4>
-                                    <form>
+                                    <form method="post" action="/feedback" id='feedbackform'>
 
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Name*">
+                                            <input type="text" class="form-control" placeholder="Name*" name="name">
                                         </div>
 
                                         <div class="form-group">
-                                            <input type="email" class="form-control" placeholder="Email*">
+                                            <input type="email" class="form-control" placeholder="Email*" name="email">
                                         </div>
 
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Subject*">
+                                            <input type="text" class="form-control" placeholder="Subject*" name="subject">
                                         </div>
 
                                         <div class="form-group">
-                                            <textarea rows="9" class="form-control" placeholder="Message"></textarea>
+                                            <textarea rows="9" class="form-control" placeholder="Message" name="message"></textarea>
                                         </div>
 
 
-                                        <a type="submit" class="btn btn-default">Send!</a>
+                                        <input type="submit" class="btn btn-default" value="Send!">
 
                                     </form>
 
@@ -348,7 +348,7 @@
 
         <script src="/js/plugins.js"></script>
         <script src="/js/jquery.magnific-popup.js"></script>
-        <script src="/js/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+        <script src="/js/feedback.js"></script>
 
         <script src="/js/main-home.js"></script>
 </body>
